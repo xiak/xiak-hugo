@@ -1,7 +1,7 @@
 ################################# Default configuration ###################
 # https://www.gohugo.org/doc/overview/configuration/
 baseURL = "https://xiak.com"
-theme = "xiak"
+theme = "xiak-hugo"
 title = "XIAK | Community"
 themesDir = "../.."
 # post pagination
