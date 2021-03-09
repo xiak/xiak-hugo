@@ -1,6 +1,6 @@
 ################################# Default configuration ###################
 # https://www.gohugo.org/doc/overview/configuration/
-baseURL = "https://xiak.github.com"
+baseURL = "https://xiak.github.io"
 theme = "xiak-hugo"
 title = "XIAK | Community"
 themesDir = "../.."
