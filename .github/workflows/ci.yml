@@ -16,7 +16,7 @@ jobs:
       - name: Build
         # remove --minify tag if you do not need it
         # docs: https://gohugo.io/hugo-pipes/minification/
-        run: cd xiak.com && hugo --gc --themesDir ../..
+        run: cd xiak.com && hugo --gc --themesDir ../.. && cp ../CNAME ./public
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
