@@ -1,8 +1,8 @@
 ---
-title: "字符串的 URL 化"
-date: 2018-09-24T11:07:10+06:00
+title: "字符串 URL 化"
+date: 2021-03-10T18:39:00+08:00
 author: Xiak
-image : "images/blog/blog-post-1.jpg"
+image : "images/blog/light.jpg"
 bg_image: "images/featue-bg.jpg"
 categories: ["Algorithm"]
 tags: ["Leetcode","Interview"]
@@ -32,19 +32,24 @@ URL化。编写一种方法，将字符串中的空格全部替换为%20。假�
 输出："%20%20%20%20%20"
 ```
 
-
-
 > 提示：
   字符串长度在 [0, 500000] 范围内。
 
 ### 思路
 
-Place Holder
+#### 数据结构
+- 分析 golang 底层字符串结构
+- 在字符串的基础上替换空格
+
+#### 算法
+
 
 ### 实现
 
 ```
-Place Holder
+func replaceSpaces(S string, length int) string {
+    
+}
 ```
 
 ### Leetcode 提交记录
