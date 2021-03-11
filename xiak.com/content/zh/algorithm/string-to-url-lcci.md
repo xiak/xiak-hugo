@@ -46,7 +46,7 @@ type StringHeader struct {
 }
 ```
 
-![golang-string](../../../static/images/algorithm/golang-string.png)
+![golang-string](images/algorithm/golang-string.png)
 
 要访问字符串中某个或者某段字符可以通过以下方式:
 ```golang
