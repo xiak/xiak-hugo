@@ -48,20 +48,13 @@ type StringHeader struct {
 
 ![golang-string](/images/algorithm/golang-string.png)
 
-要访问字符串中某个或者某段字符可以通过以下方式:
-```golang
-x := "Mr Xiak"
-fmt.Println(x[0], x[3]) // "77 88" ('M' and 'X')
-fmt.Println(x[:2]) // "Mr"
-fmt.Println(x[3:]) // "Xiak"
-fmt.Println(x[:])  // "Mr Xiak"
-fmt.Println("hi" + x[2:]) // "Hi Xiak"
-```
 要修改字符串必须先将 `string` 转换为 `[]byte` 或者 `[]rune`
 
 算法
 
-
+1. 直接用类库 `strings.Replace` 或则 `bytes.Buffer`
+2. 常规算法： 新申请一个存储空间 (3倍 length 大小)，遍历字符串 `length` 长度, 把每个字符重新写入到新的内存空间中
+3. 常规算法优化: 因为涉及到类型转换: `[]byte` 转 `string`, 其中需要内存的拷贝，可以使用 `*(*string)(unsafe.Pointer(&b))` 来实现零拷贝转换
 
 ### 实现
 
@@ -88,7 +81,7 @@ func ReplaceSpaces_2(S string, length int) string {
 	return buffer.String()
 }
 ```
-
+常规算法
 ```golang
 func ReplaceSpaces_3(S string, length int) string {
 	t := make([]byte, length*3)
@@ -105,8 +98,7 @@ func ReplaceSpaces_3(S string, length int) string {
 	return string(t[0:w])
 }
 ```
-
-第 4 种是第三种方法的变种
+常规算法丶改
 ```golang
 func SliceByteToString(b []byte) string {
 	return *(*string)(unsafe.Pointer(&b))
@@ -138,6 +130,29 @@ BenchmarkReplaceSpaces_2-4       9039098               130 ns/op              96
 BenchmarkReplaceSpaces_3-4      15924559                72.8 ns/op            80 B/op          2 allocs/op
 BenchmarkReplaceSpaces_4-4      25308819                46.3 ns/op            48 B/op          1 allocs/op
 ```
+
+可以看到 常规算法丶改各方面性能都是最优的, 而且少了一次内存分配
+```golang
+// src/runtime/string.go
+// The constant is known to the compiler.
+// There is no fundamental theory behind this number.
+const tmpStringBufSize = 32
+type tmpBuf [tmpStringBufSize]byte
+func slicebytetostring(buf *tmpBuf, b []byte) (str string) {
+    ......
+    if buf != nil && len(b) <= len(buf) {
+        p = unsafe.Pointer(buf)
+    } else {
+        p = mallocgc(uintptr(len(b)), nil, false)
+    }
+    ......
+    memmove(p, (*(*slice)(unsafe.Pointer(&b))).array, uintptr(len(b)))
+    ......
+}
+```
+从上面 `golang` 的源代码可以看出, 通过 `string([]byte)` 把 `[]byte` 强制转换为 `string` 时候, 只要 `[]byte` 长度超过 32，就会通过 `mallocgc` 申请新的内存, 然后通过 `memmove` 做一次内存搬运
+
+而通过 `*(*string)(unsafe.Pointer(&b))` 作类型转换时，其本质只是改变了指针指向而已，没有做内存申请和搬运，所以性能要好很多
 
 ### Leetcode 提交记录
 
