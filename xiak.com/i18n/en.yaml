@@ -28,3 +28,7 @@
   translation: Tags
 - id: categories
   translation: Categories
+- id: cookie_msg
+  translation: This site uses cookies. By continuing to use this website, you agree to their use
+- id: agress
+  translation: I Accept

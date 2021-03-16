@@ -35,7 +35,7 @@
 {{ if site.Params.cookies.enable }}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
 <div id="js-cookie-box" class="cookie-box cookie-box-hide">
-	This site uses cookies. By continuing to use this website, you agree to their use. <span id="js-cookie-button" class="btn btn-main btn-solid-border">I Accept</span>
+	{{ i18n "cookie_msg" }} <span id="js-cookie-button" class="btn btn-small btn-solid-border" style="margin: 10px">{{ i18n "agree" }}</span>
 </div>
 <script>
 	(function ($) {
