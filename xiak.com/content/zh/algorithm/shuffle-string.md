@@ -13,7 +13,7 @@ type: "post"
 
 ### Leetcode 链接
 
-[https://leetcode-cn.com/problems/shuffle-string/](https://leetcode-cn.com/problems/shuffle-string/)
+[1528. 重新排列字符串](https://leetcode-cn.com/problems/shuffle-string/)
 
 ### 题干
 给你一个字符串 s 和一个 长度相同 的整数数组 indices 。
