@@ -212,6 +212,8 @@ func (this *MyLinedList) AddAtIndex(index, val int) {
 
 时间复杂度为 `O(n)`, 空间复杂度为 `O(1)`
 
+![list-delete-node-at-index](/images/algorithm/list-delete-node-at-index.png)
+
 ```golang
 func (this *MyLinkedList) DeleteAtIndex(index int) {
     // 注意这里是 >= (比如 100 个节点, index 范围为 0-99, 当 index == 100 时已经越界)
@@ -233,7 +235,7 @@ func (this *MyLinkedList) DeleteAtIndex(index int) {
 
 - `Get(index)`: 获取链表中第 index 个节点的值。如果索引无效，则返回-1。
 
-获取指定位置的节点信息, 需要遍历链表
+获取指定位置的节点信息, 需要遍历链表, 找到位置返回节点值即可
 
 时间复杂度为 `O(n)`, 空间复杂度为 `O(1)`
 
