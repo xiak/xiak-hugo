@@ -171,6 +171,11 @@ hasChildren = true
   name = "算法"
   URL = "algorithm"
 
+  [[Languages.zh.menu.main]]
+  parent = "博客"
+  name = "Kubernetes"
+  URL = "kubernetes"
+
 [[Languages.zh.menu.main]]
 name = "联系我"
 URL = "contact"
@@ -202,6 +207,11 @@ hasChildren = true
   parent = "Blog"
   name = "Algorithm"
   URL = "algorithm"
+
+  [[Languages.en.menu.main]]
+  parent = "Blog"
+  name = "Kubernetes"
+  URL = "kubernetes"
 
 [[Languages.en.menu.main]]
 name = "Contact"
