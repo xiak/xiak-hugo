@@ -21,7 +21,7 @@ type: "post"
 - 第一步 集群规划
 - 第二步 安装 Loadbalancer 集群
 - 第三步 安装独立的 ETCD 集群
-- 第四步 创建 kubernetes api 节点
+- 第四步 创建 kubernetes master 节点
 - 第五步 安装网络插件
 - 第六步 添加节点到创建好的集群中
 
@@ -114,7 +114,7 @@ EOF
 10.10.10.4    k8s-etcd-2
 10.10.10.5    k8s-etcd-3
 ```
-在第一步中定义了三台主机作为 kubernetes api server
+在第一步中定义了三台主机作为 `kubernetes master`
 ```shell script
 10.10.10.6    k8s-master-1
 10.10.10.7    k8s-master-2
