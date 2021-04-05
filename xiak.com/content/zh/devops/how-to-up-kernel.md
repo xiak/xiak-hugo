@@ -1,6 +1,6 @@
 ---
 title: "如何升级CentOS内核"
-date: 2019-03-05T21:6:00+08:00
+date: 2019-03-05T21:06:00+08:00
 author: Xiak
 image : "images/blog/light.jpg"
 bg_image: "images/featue-bg.jpg"
