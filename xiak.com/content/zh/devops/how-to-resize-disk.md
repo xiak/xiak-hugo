@@ -5,7 +5,7 @@ author: Xiak
 image : "images/blog/keyboard.jpg"
 bg_image: "images/featue-bg.jpg"
 categories: ["DevOps"]
-tags: ["DevOps", "Linux"]
+tags: ["devops", "Linux"]
 description: ""
 draft: false
 type: "post"
