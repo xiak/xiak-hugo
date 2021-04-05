@@ -7,8 +7,8 @@ banner:
   content : ""
   button:
     enable : true
-    label : "算法通关"
-    link : "algorithm"
+    label : "DevOps"
+    link : "devops"
 
 ############################# About #################################
 about:
