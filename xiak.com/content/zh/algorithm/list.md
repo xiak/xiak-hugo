@@ -2,7 +2,7 @@
 title: "链表设计"
 date: 2021-03-19T15:30:00+08:00
 author: Xiak
-image : "images/blog/caffe.jpg"
+image : "images/blog/cafe.jpg"
 bg_image: "images/featue-bg.jpg"
 categories: ["Algorithm"]
 tags: ["Leetcode", "List"]
