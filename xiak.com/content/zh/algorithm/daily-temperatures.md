@@ -1,5 +1,5 @@
 ---
-title: "两数相加: 常规算法和原地算法"
+title: "739. 每日温度"
 date: 2021-03-22T16:30:00+08:00
 author: Xiak
 image : "images/blog/work.jpg"

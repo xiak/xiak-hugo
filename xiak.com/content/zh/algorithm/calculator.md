@@ -1,5 +1,5 @@
 ---
-title: "两数相加: 常规算法和原地算法"
+title: "面试题 16.26. 计算器"
 date: 2021-03-22T16:30:00+08:00
 author: Xiak
 image : "images/blog/work.jpg"
@@ -63,8 +63,8 @@ type: "post"
 
 ### Benchmark 
 ```
-执行用时：8 ms, 在所有 Go 提交中击败了 92.82% 的用户
-内存消耗：4.4 MB, 在所有 Go 提交中击败了 99.94%的用户
+执行用时： ms
+内存消耗： MB
 ```
 
 ### Leetcode 提交记录
