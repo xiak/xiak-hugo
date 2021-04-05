@@ -173,8 +173,8 @@ hasChildren = true
 
   [[Languages.zh.menu.main]]
   parent = "博客"
-  name = "Kubernetes"
-  URL = "kubernetes"
+  name = "DevOps"
+  URL = "devops"
 
 [[Languages.zh.menu.main]]
 name = "联系我"
@@ -210,8 +210,8 @@ hasChildren = true
 
   [[Languages.en.menu.main]]
   parent = "Blog"
-  name = "Kubernetes"
-  URL = "kubernetes"
+  name = "DevOps"
+  URL = "devops"
 
 [[Languages.en.menu.main]]
 name = "Contact"

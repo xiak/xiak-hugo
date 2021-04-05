@@ -4,8 +4,8 @@ date: 2019-06-19T18:30:00+08:00
 author: Xiak
 image : "images/blog/keyboard.jpg"
 bg_image: "images/featue-bg.jpg"
-categories: ["Kubernetes"]
-tags: ["Kubernetes", "DevOps", "Linux"]
+categories: ["DevOps"]
+tags: ["DevOps", "Linux"]
 description: ""
 draft: false
 type: "post"
