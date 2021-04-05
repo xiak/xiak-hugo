@@ -43,21 +43,7 @@ kubernetes
 
 2 本文将带领大家安装一个高可用的 `k8s` 集群, 最少需要 `11` 台机器(虚拟机或物理机都可以)
 
-|  类型   | 系统  |
-|  ----  | ----  |
-| etcd  | centos 7 min |
-| etcd  | centos 7 min |
-| etcd  | centos 7 min |
-| soft loadbalancer  | centos 7 min |
-| soft loadbalancer  | centos 7 min |
-| soft loadbalancer  | centos 7 min |
-| kubernetes master  | centos 7 min |
-| kubernetes master  | centos 7 min |
-| kubernetes master  | centos 7 min |
-| kubernetes worker  | centos 7 min |
-| kubernetes bastion  | centos 7 min |
-
-- `3` 台 `k8s` 集群外 `etcd cluster`
+- `3` 台 `k8s` 集群外的 `etcd` 集群
 - `3` 台由 `haproxy + keepalived` 组成的 `soft loadbalancer`
 - `3` 台 `k8s master` 节点, 每台节点上分别包含 `kube-apiserver`, `kube-contorller-manager`, `kube-scheduler` 三个服务
 - `1` 至少 `1` 台干活的节点 `k8s worker`
