@@ -26,8 +26,12 @@ type: "post"
 
 ### 查看 disk 状况
 
-``df -h``
+执行
+```
+df -h
+```
 
+输出
 ```bash
 Filesystem           Size  Used Avail Use% Mounted on
 devtmpfs             9.8G     0  9.8G   0% /dev
@@ -51,12 +55,18 @@ overlay               50G  2.3G   48G   5% /var/lib/docker/overlay2/8c532f63cb21
 
 ### 备份 /home 目录
 
-``cp -r /home/ homebak/``
+执行
+```
+cp -r /home/ homebak/
+```
 
 
 ### 卸载 /home 目录
 
-``umount /home``
+执行
+```
+umount /home
+```
 
 如果 `/home` 目录下有进程正在运，使用 `fuser -m -v -i -k /home` 终止 `/home` 目录下的进程，最后使用 `umount /home` 卸载 `/home`
 
@@ -64,8 +74,12 @@ overlay               50G  2.3G   48G   5% /var/lib/docker/overlay2/8c532f63cb21
 
 `xfs` 文件系统不支持减少逻辑分区，无法使用 `lvreduce`，这里用 `lvremove` 先删除 `/home` 所在的lv
 
-``lvremove /dev/mapper/cl-home``
+执行
+```
+lvremove /dev/mapper/cl-home
+```
 
+输出
 ```bash
 Do you really want to remove active logical volume cl/home? [y/n]: y
   Logical volume "home" successfully removed
@@ -87,8 +101,12 @@ data blocks changed from 13107200 to 249036800
 
 ### 查看 vg 
 
-``vgdisplay``
+执行
+```
+vgdisplay
+```
 
+输出
 ```bash
 --- Volume group ---
   VG Name               cl
@@ -117,8 +135,12 @@ data blocks changed from 13107200 to 249036800
 
 ### 扩展 /root所在的lv，增加 900G
 
-``lvextend -L +900G /dev/mapper/cl-root``
+执行
+```
+lvextend -L +900G /dev/mapper/cl-root
+```
 
+输出
 ```bash
 Size of logical volume cl/root changed from 50.00 GiB (12800 extents) to 950.00 GiB (243200 extents).
 Logical volume cl/root successfully resized.
@@ -126,8 +148,12 @@ Logical volume cl/root successfully resized.
 
 ### 扩展 /root文件系统
 
-``xfs_growfs /dev/mapper/cl-root``
+执行
+```
+xfs_growfs /dev/mapper/cl-root
+```
 
+输出
 ```bash
 meta-data=/dev/mapper/cl-root    isize=512    agcount=4, agsize=3276800 blks
          =                       sectsz=512   attr=2, projid32bit=1
@@ -143,7 +169,12 @@ data blocks changed from 13107200 to 249036800
 
 ### 重建 home 的lv
 
-``lvcreate -L 63G -n home cl``
+执行
+```
+lvcreate -L 63G -n home cl
+```
+
+输出
 
 ```bash
  Logical volume "home" created.
@@ -151,8 +182,12 @@ data blocks changed from 13107200 to 249036800
 
 ### 查看 vg 
 
-``vgdisplay``
+执行
+```
+vgdisplay
+```
 
+输出
 ```bash
 --- Volume group ---
   VG Name               cl
@@ -179,7 +214,12 @@ data blocks changed from 13107200 to 249036800
 
 ### 格式化创建文件系统
 
-``mkfs.xfs /dev/cl/home``
+执行
+```
+mkfs.xfs /dev/cl/home
+```
+
+输出
 
 ```bash
 meta-data=/dev/cl/home           isize=512    agcount=4, agsize=4128768 blks
@@ -195,16 +235,26 @@ realtime =none                   extsz=4096   blocks=0, rtextents=0
 
 ### 重新挂载 home 目录
 
-``mount /dev/cl/home /home``
+执行
+```
+mount /dev/cl/home /home
+```
 
 ### 还原 home 目录数据
 
-``cp -R ./homebak/* /home``
+执行
+```
+cp -R ./homebak/* /home
+```
 
 ###　查看磁盘情况
 
-``df -h``
+执行
+```
+df -h
+```
 
+输出
 ```bash
 Filesystem           Size  Used Avail Use% Mounted on
 devtmpfs             9.8G     0  9.8G   0% /dev
@@ -237,16 +287,27 @@ overlay              950G  2.3G  948G   1% /var/lib/docker/overlay2/8c532f63cb21
 
 ### 扫描 SCSI总线并添加 SCSI 设备
 
-``for host in $(ls /sys/class/scsi_host) ; do echo "- - -" > /sys/class/scsi_host/$host/scan; done``
+执行
+```
+for host in $(ls /sys/class/scsi_host) ; do echo "- - -" > /sys/class/scsi_host/$host/scan; done
+```
+
 
 ### 重新扫描 SCSI 总线
 
-``for scsi_device in $(ls /sys/class/scsi_device/); do echo 1 > /sys/class/scsi_device/$scsi_device/device/rescan; done``
+执行
+```
+for scsi_device in $(ls /sys/class/scsi_device/); do echo 1 > /sys/class/scsi_device/$scsi_device/device/rescan; done
+```
 
-###　查看已添加的磁盘，能够看到sdb说明添加成功
+### 查看已添加的磁盘，能够看到sdb说明添加成功
 
-``lsblk``
+执行
+```
+lsblk
+```
 
+输出
 ```bash
 NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 fd0           2:0    1    4K  0 disk
@@ -265,12 +326,19 @@ sr0          11:0    1 1024M  0 rom
 
 ### 初始化磁盘
 
-``` pvcreate /dev/sdb```
+执行
+```
+pvcreate /dev/sdb
+```
 
 ### 查看物理信息
 
-``pvdisplay``
+执行
+```
+pvdisplay
+```
 
+输出
 ```bash 
  --- Physical volume ---
   PV Name               /dev/sda2
@@ -296,15 +364,23 @@ sr0          11:0    1 1024M  0 rom
   PV UUID               aCtCCE-c0Al-2kR1-1AN5-c2Ll-3q07-cFSbFz
 ```
 
-### 创建逻辑卷组 vg,将/dev/sdb物理卷加入到这个卷组里
+### 创建逻辑卷组
 
-``vgcreate cl2 /dev/sdb``
+创建逻辑卷组 `cl2`, 并将 `/dev/sdb` 物理卷加入到这个卷组里
+
+执行
+```
+vgcreate cl2 /dev/sdb
+```
 
 ### 查看逻辑卷组
 
-``vgdisplay``
+执行
+```
+vgdisplay
+```
 
-
+输出
 ```bash
 --- Volume group ---
   VG Name               cl
@@ -351,15 +427,24 @@ sr0          11:0    1 1024M  0 rom
 
 ### 创建逻辑卷
 
-``lvcreate -L 99G -n home cl2``
+执行
+```
+lvcreate -L 99G -n home cl2
+```
 
 ### 格式化
 
-`` mkfs.xfs /dev/cl2/home``
+执行
+```
+mkfs.xfs /dev/cl2/home
+```
 
 ### 重新挂载 home 目录
 
-``mount /dev/cl2/home /home``
+执行
+```
+mount /dev/cl2/home /home
+```
 
 ## 附录
 
@@ -367,6 +452,7 @@ sr0          11:0    1 1024M  0 rom
 
 如何开机自动挂载 `/dev/cl3/ceph` 到 `/ceph` ?
 
+执行
 ```bash
 cat >> /etc/fstab <<EOF
 /dev/mapper/cl3-ceph    /ceph                   xfs     defaults        0 0
@@ -375,4 +461,5 @@ EOF
 
 ### 如何清空磁盘数据
 
+执行
 `dd if=/dev/zero of=/dev/sdc bs=512 count=1`
