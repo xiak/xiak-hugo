@@ -14,6 +14,8 @@ type: "post"
 
 # 自动化安装高性能高可用 kubernetes 集群
 
+本文是通过脚手架 [github@k8s-infra](https://github.com/xiak/k8s-infra.git) 安装 `k8s` 集群, 没有涉及 `k8s` 各组件的详细介绍
+
 ## 目录
 - 前提
 - 第一步 集群规划
