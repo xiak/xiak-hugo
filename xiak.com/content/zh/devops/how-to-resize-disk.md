@@ -26,12 +26,12 @@ type: "post"
 
 ### 查看 disk 状况
 
-执行
 ```
 df -h
 ```
 
-输出
+Output:
+
 ```bash
 Filesystem           Size  Used Avail Use% Mounted on
 devtmpfs             9.8G     0  9.8G   0% /dev
@@ -55,7 +55,6 @@ overlay               50G  2.3G   48G   5% /var/lib/docker/overlay2/8c532f63cb21
 
 ### 备份 /home 目录
 
-执行
 ```
 cp -r /home/ homebak/
 ```
@@ -63,7 +62,6 @@ cp -r /home/ homebak/
 
 ### 卸载 /home 目录
 
-执行
 ```
 umount /home
 ```
@@ -74,12 +72,12 @@ umount /home
 
 `xfs` 文件系统不支持减少逻辑分区，无法使用 `lvreduce`，这里用 `lvremove` 先删除 `/home` 所在的lv
 
-执行
 ```
 lvremove /dev/mapper/cl-home
 ```
 
-输出
+Output:
+
 ```bash
 Do you really want to remove active logical volume cl/home? [y/n]: y
   Logical volume "home" successfully removed
@@ -101,12 +99,12 @@ data blocks changed from 13107200 to 249036800
 
 ### 查看 vg 
 
-执行
 ```
 vgdisplay
 ```
 
-输出
+Output:
+
 ```bash
 --- Volume group ---
   VG Name               cl
@@ -133,27 +131,27 @@ vgdisplay
 
 根据 `Free  PE / Size`  来增加 `lv`, 注意， `Free  PE / Size` 一定要留一部分给 `/home`, 这里 我准备留 `68G` 给 `/home`， 其余的都扩展 `/root`
 
-### 扩展 /root所在的lv，增加 900G
+### 扩展 /root 所在的 lv，增加 900G
 
-执行
 ```
 lvextend -L +900G /dev/mapper/cl-root
 ```
 
-输出
+Output:
+
 ```bash
 Size of logical volume cl/root changed from 50.00 GiB (12800 extents) to 950.00 GiB (243200 extents).
 Logical volume cl/root successfully resized.
 ```
 
-### 扩展 /root文件系统
+### 扩展 /root 文件系统
 
-执行
 ```
 xfs_growfs /dev/mapper/cl-root
 ```
 
-输出
+Output:
+
 ```bash
 meta-data=/dev/mapper/cl-root    isize=512    agcount=4, agsize=3276800 blks
          =                       sectsz=512   attr=2, projid32bit=1
@@ -167,14 +165,13 @@ realtime =none                   extsz=4096   blocks=0, rtextents=0
 data blocks changed from 13107200 to 249036800
 ```
 
-### 重建 home 的lv
+### 重建 home 的 lv
 
-执行
 ```
 lvcreate -L 63G -n home cl
 ```
 
-输出
+Output:
 
 ```bash
  Logical volume "home" created.
@@ -182,12 +179,12 @@ lvcreate -L 63G -n home cl
 
 ### 查看 vg 
 
-执行
 ```
 vgdisplay
 ```
 
-输出
+Output:
+
 ```bash
 --- Volume group ---
   VG Name               cl
@@ -210,16 +207,17 @@ vgdisplay
   Free  PE / Size       47 / 188.00 MiB
   VG UUID               lIOQS4-KiX0-yfvd-5iJO-BqPm-WIIx-7uie2W
 ```
+
 查看 `Free  PE / Size` 是否被分配完了
 
 ### 格式化创建文件系统
 
-执行
+
 ```
 mkfs.xfs /dev/cl/home
 ```
 
-输出
+Output:
 
 ```bash
 meta-data=/dev/cl/home           isize=512    agcount=4, agsize=4128768 blks
@@ -233,28 +231,28 @@ log      =internal log           bsize=4096   blocks=8064, version=2
 realtime =none                   extsz=4096   blocks=0, rtextents=0
 ```
 
-### 重新挂载 home 目录
+### 重新挂载 /home 目录
 
-执行
 ```
 mount /dev/cl/home /home
 ```
 
 ### 还原 home 目录数据
 
-执行
+Output:
+
 ```
 cp -R ./homebak/* /home
 ```
 
 ###　查看磁盘情况
 
-执行
 ```
 df -h
 ```
 
-输出
+Output:
+
 ```bash
 Filesystem           Size  Used Avail Use% Mounted on
 devtmpfs             9.8G     0  9.8G   0% /dev
@@ -287,7 +285,6 @@ overlay              950G  2.3G  948G   1% /var/lib/docker/overlay2/8c532f63cb21
 
 ### 扫描 SCSI总线并添加 SCSI 设备
 
-执行
 ```
 for host in $(ls /sys/class/scsi_host) ; do echo "- - -" > /sys/class/scsi_host/$host/scan; done
 ```
@@ -295,19 +292,18 @@ for host in $(ls /sys/class/scsi_host) ; do echo "- - -" > /sys/class/scsi_host/
 
 ### 重新扫描 SCSI 总线
 
-执行
 ```
 for scsi_device in $(ls /sys/class/scsi_device/); do echo 1 > /sys/class/scsi_device/$scsi_device/device/rescan; done
 ```
 
 ### 查看已添加的磁盘，能够看到sdb说明添加成功
 
-执行
 ```
 lsblk
 ```
 
-输出
+Output:
+
 ```bash
 NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 fd0           2:0    1    4K  0 disk
@@ -326,19 +322,18 @@ sr0          11:0    1 1024M  0 rom
 
 ### 初始化磁盘
 
-执行
 ```
 pvcreate /dev/sdb
 ```
 
 ### 查看物理信息
 
-执行
 ```
 pvdisplay
 ```
 
-输出
+Output:
+
 ```bash 
  --- Physical volume ---
   PV Name               /dev/sda2
@@ -368,19 +363,18 @@ pvdisplay
 
 创建逻辑卷组 `cl2`, 并将 `/dev/sdb` 物理卷加入到这个卷组里
 
-执行
 ```
 vgcreate cl2 /dev/sdb
 ```
 
 ### 查看逻辑卷组
 
-执行
 ```
 vgdisplay
 ```
 
-输出
+Output:
+
 ```bash
 --- Volume group ---
   VG Name               cl
@@ -427,21 +421,18 @@ vgdisplay
 
 ### 创建逻辑卷
 
-执行
 ```
 lvcreate -L 99G -n home cl2
 ```
 
 ### 格式化
 
-执行
 ```
 mkfs.xfs /dev/cl2/home
 ```
 
 ### 重新挂载 home 目录
 
-执行
 ```
 mount /dev/cl2/home /home
 ```
@@ -452,7 +443,6 @@ mount /dev/cl2/home /home
 
 如何开机自动挂载 `/dev/cl3/ceph` 到 `/ceph` ?
 
-执行
 ```bash
 cat >> /etc/fstab <<EOF
 /dev/mapper/cl3-ceph    /ceph                   xfs     defaults        0 0
@@ -461,5 +451,4 @@ EOF
 
 ### 如何清空磁盘数据
 
-执行
 `dd if=/dev/zero of=/dev/sdc bs=512 count=1`
