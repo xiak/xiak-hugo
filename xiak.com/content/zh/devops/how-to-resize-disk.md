@@ -245,7 +245,7 @@ Output:
 cp -R ./homebak/* /home
 ```
 
-###　查看磁盘情况
+### 查看磁盘情况
 
 ```
 df -h
@@ -279,16 +279,13 @@ overlay              950G  2.3G  948G   1% /var/lib/docker/overlay2/8c532f63cb21
 `/dev/mapper/cl-root` 从 `50G` 增加到了 `950G`
 
 
-##　如果新增加硬盘
+## 如果新增加硬盘
 
-### 手动给主机增加 100G 硬盘
-
-### 扫描 SCSI总线并添加 SCSI 设备
+### 手动给主机增加 100G 硬盘, 扫描 SCSI 总线并添加 SCSI 设备
 
 ```
 for host in $(ls /sys/class/scsi_host) ; do echo "- - -" > /sys/class/scsi_host/$host/scan; done
 ```
-
 
 ### 重新扫描 SCSI 总线
 
