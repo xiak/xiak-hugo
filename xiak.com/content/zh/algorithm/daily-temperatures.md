@@ -1,8 +1,8 @@
 ---
 title: "739. 每日温度"
-date: 2021-03-22T16:30:00+08:00
+date: 2021-04-02T11:59:00+08:00
 author: Xiak
-image : "images/blog/work.jpg"
+image : "images/blog/web-browse.jpg"
 bg_image: "images/featue-bg.jpg"
 categories: ["Algorithm"]
 tags: ["Leetcode"]
@@ -30,7 +30,30 @@ type: "post"
 
 ### 思路
 
-#### 暴力算法
+#### 暴力迭代原地算法
+输入是一个列表，输出也是一个列表，且长度相同，考虑使用原地算法
+
+遍历列表 temperatures, 每个数字和它所在位置之后的所有数据比较，找到比它大的数字，他们之间的步长即为结果，存入当前数字位置 (不用额外分配内存)，如果整个列表没有比它大的数字，则返回 0
+
+- 最坏时间复杂度为 O(xy), x 为列表长度, y 为 x 后的所有数据长度, 
+- 空间复杂度 O(1)
+
+#### KMP 算法
+
+[如何更好地理解和掌握 KMP 算法?](https://www.zhihu.com/question/21923021)
+
+[Bilibili KMP算法易懂版](https://www.bilibili.com/video/BV1jb411V78H?from=search&seid=9213718721515748230)
+
+ababacd
+
+a
+ab
+aba
+abab
+ababc
+ababacd
+
+- 时间复杂度为 O(x+y)
 
 #### 单调栈
 
