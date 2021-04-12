@@ -5,7 +5,7 @@ author: Xiak
 image : "images/blog/book.jpg"
 bg_image: "images/featue-bg.jpg"
 categories: ["Algorithm"]
-tags: ["Leetcode"]
+tags: ["Leetcode", "KMP"]
 description: ""
 draft: false
 type: "post"
